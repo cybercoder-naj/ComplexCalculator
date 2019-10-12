@@ -1,9 +1,9 @@
 *.class
-build/
+build/classes
+build/poms
+build/tmp
 .gradle
 .idea
-
-*.jar
 *.aar
 *.war
 !gradle-wrapper.jar

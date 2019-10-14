@@ -1,5 +1,6 @@
 package com.nishant.complexcalculator;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -18,14 +19,14 @@ public class ComplexCalculator {
 
     /**
      * Instantiate the object with an expression.
-     *
+     * <p>
      * The function can perform the following operations:-
      * <ul>
-     *     <li>Exponent (^)</li>
-     *     <li>Division (/)</li>
-     *     <li>Multiplication (*)</li>
-     *     <li>Addition (+)</li>
-     *     <li>Subtraction (-)</li>
+     * <li>Exponent (^)</li>
+     * <li>Division (/)</li>
+     * <li>Multiplication (*)</li>
+     * <li>Addition (+)</li>
+     * <li>Subtraction (-)</li>
      * </ul>
      * If you like to involve variables in the function, you are most welcome to do so.
      * If there are any variables, you must map them to double values in a {@code Map<Character, Double>} collection.
@@ -34,8 +35,8 @@ public class ComplexCalculator {
      * You can also you <i>E</i> to denote exponent. <code>For example, 3.0E10 = 3.0 * 10<sup>10</sup></code>.
      * The rules of using <i>E</i> will coincide with that of {@code Double}:-
      * <ul>
-     *     <li>The digits after E must not be fractional</li>
-     *     <li>The digits before E must have a integral and a fractional part.</li>
+     * <li>The digits after E must not be fractional.</li>
+     * <li>The digits before E must have a integral and a fractional part.</li>
      * </ul>
      *
      * @param function given expression.
@@ -87,10 +88,10 @@ public class ComplexCalculator {
      * <li>If there is any error in the code.</li>
      * </ul>
      *
+     * @param variableMap characters in key will be replaced by its respective double value.
+     * @return the solution to the given expression with value of variables.
      * @see Double
      * @see Map
-     * @param variableMap characters in key will be replaced by its respective double value.
-     * @return the solution to the given expression and value of variables.
      */
     public double compute(Map<Character, Double> variableMap) {
         try {
@@ -98,7 +99,7 @@ public class ComplexCalculator {
             if (this.getFunction().length() == 0) throw new IllegalStateException("Function is empty");
             if (variableMap == null) throw new NullPointerException("variableMap is null");
 
-            String function = "(" + this.getFunction() + ")";
+            String function = "(" + getFunction() + ")";
             function = function.replaceAll(" ", "");
             function = function.replaceAll("pi", String.valueOf(Math.PI));
             for (Entry<Character, Double> entry : variableMap.entrySet()) {
@@ -114,11 +115,14 @@ public class ComplexCalculator {
 
             Matcher matcher1 = Pattern.compile("[(](-?\\d+(\\.\\d+(E-?\\d+)?)?[\\^/*+\\-])+-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
             Matcher matcher2 = Pattern.compile("[(]-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
-            Matcher matcher3 = Pattern.compile("[(]?-{2}").matcher(function);
+            Matcher matcher3 = Pattern.compile("(--|\\+\\+)").matcher(function);
+            Matcher matcher4 = Pattern.compile("(\\+-|-\\+)").matcher(function);
             boolean match1 = matcher1.find();
             boolean match2 = matcher2.find();
             boolean match3 = matcher3.find();
-            while (match1 || match2 || match3) {
+            boolean match4 = matcher4.find();
+            while (match1 || match2 || match3 || match4) {
+                function = function.replaceAll("[(]\\+", "(");
                 String group;
                 if (match1) {
                     group = matcher1.group();
@@ -129,7 +133,6 @@ public class ComplexCalculator {
                     else if (group.indexOf('-') != -1 && group.charAt(group.indexOf('-') - 1) != '(')
                         function = performOperation('-', group, function);
                     else if (group.lastIndexOf('-') != 1) function = performOperation('-', group, function);
-
                 }
 
                 matcher2.reset(function);
@@ -146,24 +149,54 @@ public class ComplexCalculator {
                     function = function.replace(group, "+");
                 }
 
+                matcher4.reset(function);
+                match4 = matcher4.find();
+                if (match4) {
+                    group = matcher4.group();
+                    function = function.replace(group, "-");
+                }
+
                 matcher1.reset(function);
                 matcher2.reset(function);
                 matcher3.reset(function);
+                matcher4.reset(function);
                 match1 = matcher1.find();
                 match2 = matcher2.find();
                 match3 = matcher3.find();
+                match4 = matcher4.find();
             }
-
             try {
                 return Double.parseDouble(function);
             } catch (NumberFormatException ex) {
-                throw new RuntimeException("Unable to compute the given string.");
+                if (function.contains("NaN"))
+                    throw new ArithmeticException("Division by zero");
+                else
+                    throw new RuntimeException("Unable to compute the given string.");
             }
-
-
-        } catch (Exception ex) {
+        } catch (ArithmeticException ex) {
+            throw ex;
+        }
+        catch (Exception ex) {
             throw new RuntimeException("Found unknown error.");
         }
+    }
+
+    /**
+     * This method is to be called when there are no variables in the function expression.
+     * Call {@code compute(Map<Character, Double>} to replace the value of variables used.
+     *
+     * @return the solution to the given expression
+     */
+    public double compute() {
+        return compute(new HashMap<>());
+    }
+
+    public static void main(String[] args) {
+        String function = "pi*r^2";
+        ComplexCalculator calc = new ComplexCalculator(function);
+        Map<Character, Double> variableMap = new HashMap<>();
+        variableMap.put('r', 7.0);
+        System.out.println(calc.compute(variableMap));
     }
 
     private int count(String function, char c) {

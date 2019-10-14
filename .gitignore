@@ -1,7 +1,5 @@
 *.class
-build/classes
-build/poms
-build/tmp
+build/
 .gradle
 .idea
 *.aar

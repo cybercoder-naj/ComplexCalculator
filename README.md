@@ -1,4 +1,4 @@
-# Complex Calculator
+﻿# Complex Calculator
 
 Complex Calculator is a java-based project helping to evaluate arithmetical operations
 
@@ -73,7 +73,7 @@ The output of the following will be **5.0**.
 You need create an object of the class and pass in a string which holds the dependent function. Create a
 Map<Character, Double> Collection and put the variables as _key_ and the value it holds as _value_. 
 ```bash
-String function = "x^2 - 4/(x - 2)";
+String function = "(x^2 - 4)/(x - 2)";
 ComplexCalculator calc = new ComplexCalculator(function);
 Map<Character, Double> variableMap = new HashMap<>();
 variableMap.put('x', 4.0);

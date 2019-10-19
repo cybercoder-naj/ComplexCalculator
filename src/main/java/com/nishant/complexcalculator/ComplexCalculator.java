@@ -3,6 +3,7 @@ package com.nishant.complexcalculator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
  * The expression is stored in {@code String function}.
  *
  * @author Nishant
- * @version 1.0
+ * @version 1.1.3
  * @since 18-09-2019
  */
 public class ComplexCalculator {
@@ -189,14 +190,6 @@ public class ComplexCalculator {
      */
     public double compute() {
         return compute(new HashMap<>());
-    }
-
-    public static void main(String[] args) {
-        String function = "pi*r^2";
-        ComplexCalculator calc = new ComplexCalculator(function);
-        Map<Character, Double> variableMap = new HashMap<>();
-        variableMap.put('r', 7.0);
-        System.out.println(calc.compute(variableMap));
     }
 
     private int count(String function, char c) {

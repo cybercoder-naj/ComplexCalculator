@@ -5,5 +5,7 @@ java:
 
 sudo: required
 
+os: windows
+
 script:
   - echo "Hello World"

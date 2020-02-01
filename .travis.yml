@@ -2,8 +2,6 @@ language: java
 
 jdk: openjdk12
 
-install: ./install-dependencies.sh
-
 script:
   - gradle assemble
   - gradle check

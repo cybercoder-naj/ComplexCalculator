@@ -1,1 +1,9 @@
 language: java
+
+java:
+  - 12
+
+sudo: required
+
+script:
+  - echo "Hello World"

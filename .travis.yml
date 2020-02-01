@@ -1,11 +1,9 @@
 language: java
 
-java:
-  - 12
+jdk: openjdk12
 
-sudo: required
-
-os: windows
+install: ./install-dependencies.sh
 
 script:
-  - echo "Hello World"
+  - gradle assemble
+  - gradle check

@@ -1,5 +1,7 @@
+install: gradle wrapper --gradle-version 4.2
+
 language: java
   
-before_script: chmod a+x gradlew
+before_install: chmod +x gradlew
 
 script: ./gradlew build

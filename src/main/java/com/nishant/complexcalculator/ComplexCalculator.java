@@ -3,9 +3,9 @@ package com.nishant.complexcalculator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Objects;
 
 /**
  * This class can compute mathematical operations based on an expression.
@@ -96,11 +96,10 @@ public class ComplexCalculator {
      */
     public double compute(Map<Character, Double> variableMap) {
         try {
-            if (this.getFunction() == null) throw new NullPointerException("function is null");
             if (this.getFunction().length() == 0) throw new IllegalStateException("Function is empty");
-            if (variableMap == null) throw new NullPointerException("variableMap is null");
-
-            String function = "(" + getFunction() + ")";
+            
+            variableMap = Objects.requireNonNull(variableMap);
+            String function = "(" + Objects.requireNonNull(this.getFunction) + ")";
             function = function.replaceAll(" ", "");
             function = function.replaceAll("pi", String.valueOf(Math.PI));
             for (Entry<Character, Double> entry : variableMap.entrySet()) {
@@ -172,13 +171,12 @@ public class ComplexCalculator {
                 if (function.contains("NaN"))
                     throw new ArithmeticException("Division by zero");
                 else
-                    throw new RuntimeException("Unable to compute the given string.");
+                    throw new ArithmeticException("Unable to compute the given string.");
             }
         } catch (ArithmeticException ex) {
             throw ex;
-        }
-        catch (Exception ex) {
-            throw new RuntimeException("Found unknown error.");
+        } catch (Exception ex) {
+            throw ex;
         }
     }
 

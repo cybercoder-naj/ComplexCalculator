@@ -3,6 +3,7 @@
 #### [View Releases and Changelogs](https://github.com/cybercoder-naj/ComplexCalculator/releases)
 
 [![Build Status](https://travis-ci.com/cybercoder-naj/ComplexCalculator.svg?branch=master)](https://travis-ci.com/cybercoder-naj/ComplexCalculator)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Complex Calculator is a java-based project helping to evaluate arithmetical operations
 

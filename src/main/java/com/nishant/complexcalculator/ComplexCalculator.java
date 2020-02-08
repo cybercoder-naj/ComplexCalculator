@@ -89,7 +89,7 @@ public class ComplexCalculator {
      * <li>If there is any error in the code.</li>
      * </ul>
      *
-     * @param variableMap characters in key will be replaced by its respective double value.
+     * @param _variableMap characters in key will be replaced by its respective double value.
      * @return the solution to the given expression with value of variables.
      * @see Double
      * @see Map

@@ -2,6 +2,9 @@ install: gradle wrapper --gradle-version 4.2
 
 language: java
   
+jdk:
+  - oraclejdk11
+  
 before_install: chmod +x gradlew
 
 script: ./gradlew build

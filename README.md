@@ -1,4 +1,6 @@
-﻿# Complex Calculator
+[![Build Status](https://travis-ci.com/cybercoder-naj/ComplexCalculator.svg?branch=master)](https://travis-ci.com/cybercoder-naj/ComplexCalculator)
+
+# Complex Calculator
 
 Complex Calculator is a java-based project helping to evaluate arithmetical operations
 

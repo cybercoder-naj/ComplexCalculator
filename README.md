@@ -94,8 +94,8 @@ The output of the following will be **6.0**.
 
 You can use exponents in the given string expression following the rules of using exponents in _double_ data type.
 The rules for using exponents are:-
-  * The digits after E must not be fractional.
-  * The digits before E must have a integral and a fractional part.
+* The digits after E must not be fractional.
+* The digits before E must have a integral and a fractional part.
 ```bash
 String function = "6.626E-34/(m*v)";
 ComplexCalculator calc = new ComplexCalculator(function);

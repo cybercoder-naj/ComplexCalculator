@@ -98,7 +98,7 @@ public class ComplexCalculator {
         try {
             if (this.getFunction().length() == 0) throw new IllegalStateException("Function is empty");
             
-            Map<Character, Double> variableMap = Objects.requireNonNull(variableMap);
+            Map<Character, Double> variableMap = Objects.requireNonNull(_variableMap);
             String function = "(" + Objects.requireNonNull(this.getFunction()) + ")";
             function = function.replaceAll(" ", "");
             function = function.replaceAll("pi", String.valueOf(Math.PI));

@@ -1,7 +1,5 @@
 *.class
 build/
-.gradle
 .idea
 *.aar
 *.war
-!gradle-wrapper.jar

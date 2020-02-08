@@ -2,8 +2,8 @@
 
 [View Releases and Changelogs](https://github.com/cybercoder-naj/ComplexCalculator/releases)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/af26fdcf65604ec0a73d907ba2b58f92)](https://app.codacy.com/manual/cybercoder-naj/ComplexCalculator?utm_source=github.com&utm_medium=referral&utm_content=cybercoder-naj/ComplexCalculator&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/cybercoder-naj/ComplexCalculator.svg?branch=master)](https://travis-ci.com/cybercoder-naj/ComplexCalculator)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/af26fdcf65604ec0a73d907ba2b58f92)](https://app.codacy.com/manual/cybercoder-naj/ComplexCalculator?utm_source=github.com&utm_medium=referral&utm_content=cybercoder-naj/ComplexCalculator&utm_campaign=Badge_Grade_Dashboard)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Complex Calculator is a java-based project helping to evaluate arithmetical operations
@@ -94,8 +94,8 @@ The output of the following will be **6.0**.
 
 You can use exponents in the given string expression following the rules of using exponents in _double_ data type.
 The rules for using exponents are:-
-* The digits after E must not be fractional.
-* The digits before E must have a integral and a fractional part.
+  * The digits after E must not be fractional.
+  * The digits before E must have a integral and a fractional part.
 ```bash
 String function = "6.626E-34/(m*v)";
 ComplexCalculator calc = new ComplexCalculator(function);

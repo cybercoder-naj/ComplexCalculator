@@ -1,6 +1,6 @@
 # Complex Calculator
 
-[View Releases and Changelogs](https://github.com/cybercoder-naj/ComplexCalculator/releases)
+[View Releases and Changelog](https://github.com/cybercoder-naj/ComplexCalculator/releases)
 
 [![Build Status](https://travis-ci.com/cybercoder-naj/ComplexCalculator.svg?branch=master)](https://travis-ci.com/cybercoder-naj/ComplexCalculator)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/af26fdcf65604ec0a73d907ba2b58f92)](https://app.codacy.com/manual/cybercoder-naj/ComplexCalculator?utm_source=github.com&utm_medium=referral&utm_content=cybercoder-naj/ComplexCalculator&utm_campaign=Badge_Grade_Dashboard)
@@ -10,7 +10,7 @@ Complex Calculator is a java-based project helping to evaluate arithmetical oper
 
 ## Getting Started
 
-**Version 1.1.3**
+**Version 1.1.4**
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.cybercoder-naj:ComplexCalculator:1.1.3'
+    implementation 'com.github.cybercoder-naj:ComplexCalculator:1.1.4'
 }
 ```
 
@@ -48,7 +48,7 @@ If you are using maven, this is what you must do,
     <dependency>
         <groupId>com.github.cybercoder-naj</groupId>
         <artifactId>ComplexCalculator</artifactId>
-        <version>1.1.3</version>
+        <version>1.1.4</version>
     </dependency>
 </dependencies>
 ```
@@ -121,7 +121,7 @@ The output of the following will be **153.93804002589985**.
 
 ## Project Documentation
 
-Don't forget to download the documentation. Visit [Documentation](https://javadoc.jitpack.io/com/github/cybercoder-naj/ComplexCalculator/1.1.3/javadoc) to view the whole documentation.
+Don't forget to download the documentation. Visit [Documentation](https://javadoc.jitpack.io/com/github/cybercoder-naj/ComplexCalculator/1.1.4/javadoc) to view the whole documentation.
 
 ## License
 

@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.com/cybercoder-naj/ComplexCalculator.svg?branch=master)](https://travis-ci.com/cybercoder-naj/ComplexCalculator)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/af26fdcf65604ec0a73d907ba2b58f92)](https://app.codacy.com/manual/cybercoder-naj/ComplexCalculator?utm_source=github.com&utm_medium=referral&utm_content=cybercoder-naj/ComplexCalculator&utm_campaign=Badge_Grade_Dashboard)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Release](https://jitpack.io/v/cybercoder-naj/ComplexCalculator.svg)](https://jitpack.io/#cybercoder-naj/ComplexCalculator)
 
 Complex Calculator is a java-based project helping to evaluate arithmetical operations
 

@@ -39,13 +39,6 @@ public class DifferentialCalculator {
         return new DifferentialCalculator(other.getFunction());
     }
 
-    public static void main(String[] args) {
-        String function = "e^x + 1";
-        DifferentialCalculator calc = DifferentialCalculator.fromString(function);
-        double answer = calc.integrate(-10, 10);
-        System.out.println(Math.round(answer * 1000) / 1000.0);
-    }
-
     /**
      * This function will instantiate a {@code DifferentialCalculator} object with the function currently used in an existing
      * {@code ComplexCalculator} object.
@@ -87,7 +80,6 @@ public class DifferentialCalculator {
      * This method will calculate the derivative of the function at a given point <i>x</i>.
      * The function uses the first principle of derivative as the basis of computation.
      * The function should only use one variable x. <br>
-     * <img src="http://latex.codecogs.com/svg.latex?\lim_{h\to0}{\frac{f(x+h)-f(x)}{h}}" border="0"/>
      *
      * @param x the value at which derivative is to be calculated.
      * @return the derivative of the function at point x.
@@ -110,10 +102,6 @@ public class DifferentialCalculator {
      * This method will calculate the area under the curve in a given range.
      * The function uses the Trapezoid Riemann sum method as the basis of computation.
      * The function should only use one variable x.<br>
-     * <img src="http://latex.codecogs.com/svg.latex?\sum_{i=a}^{b-\Delta%20x}{\frac{1}{2}\times(f(i)+f(i+\Delta%20x))\times\Delta%20x}" border="0"/>
-     * <br>where<br>
-     * <img src="http://latex.codecogs.com/svg.latex?\Delta%20x%20=\lim_{n\to\infty}{\frac{b-a}{n}}" border="0"/>
-     * <br>for the sake of time complexity, we take {@code n = 50000}.
      *
      * @param a the starting number of the range (inclusive)
      * @param b the staring number of the range (inclusive)

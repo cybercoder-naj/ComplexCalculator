@@ -3,3 +3,5 @@ build/
 .idea
 *.aar
 *.war
+*.iml
+local.properties

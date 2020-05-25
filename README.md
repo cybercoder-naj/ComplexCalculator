@@ -11,7 +11,7 @@ Complex Calculator is a java-based project helping to evaluate arithmetical oper
 
 ## Getting Started
 
-**Version 2.0.0**
+**Version 2.0.1**
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.cybercoder-naj:ComplexCalculator:2.0.0'
+    implementation 'com.github.cybercoder-naj:ComplexCalculator:2.0.1'
 }
 ```
 
@@ -49,7 +49,7 @@ If you are using maven, this is what you must do,
     <dependency>
         <groupId>com.github.cybercoder-naj</groupId>
         <artifactId>ComplexCalculator</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
     </dependency>
 </dependencies>
 ```
@@ -152,7 +152,7 @@ The output of the following will be **22037.657**
 
 ## Project Documentation
 
-Don't forget to download the documentation. Visit [Documentation](https://javadoc.jitpack.io/com/github/cybercoder-naj/ComplexCalculator/2.0.0/javadoc) to view the whole documentation.
+Don't forget to download the documentation. Visit [Documentation](https://javadoc.jitpack.io/com/github/cybercoder-naj/ComplexCalculator/2.0.1/javadoc) to view the whole documentation.
 
 ## License
 

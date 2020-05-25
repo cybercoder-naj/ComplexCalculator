@@ -259,7 +259,7 @@ public class ComplexCalculator {
             case '^':
                 return function.replace(toReplace, String.valueOf(Math.pow(n1, n2)));
             default:
-                throw new IllegalStateException("Unexpected value: " + operator);
+                throw new IllegalArgumentException("Unexpected value: " + operator);
         }
     }
 }

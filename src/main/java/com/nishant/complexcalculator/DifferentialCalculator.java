@@ -85,7 +85,7 @@ public class DifferentialCalculator {
      * @return the derivative of the function at point x.
      */
     public double differentiateAt(double x) {
-        ComplexCalculator complex = ComplexCalculator.fromString(function);
+        ComplexCalculator complex = ComplexCalculator.fromDifferential(this);
         final double h = 1E-10;
         Map<Character, Double> xVariable = new HashMap<>();
 
@@ -108,7 +108,7 @@ public class DifferentialCalculator {
      * @return the area under the function curve on [a, b]
      */
     public double integrate(double a, double b) {
-        ComplexCalculator complex = ComplexCalculator.fromString(function);
+        ComplexCalculator complex = ComplexCalculator.fromDifferential(this);
         final double deltaX = (b - a) / 50000.0;
         Map<Character, Double> xVariable = new HashMap<>();
         double integral = 0;

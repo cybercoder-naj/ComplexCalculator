@@ -5,15 +5,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Objects;
 
 /**
  * This class can compute mathematical operations based on an arithmetic expression.<br><br>
  *
  * @author Nishant
- * @version 2.0
+ * @version 3.0.0
  * @since 18-09-2019
  */
 public class ComplexCalculator {
@@ -25,6 +25,7 @@ public class ComplexCalculator {
 
     /**
      * This function will instantiate the {@code ComplexCalculator} class for you.
+     *
      * @param function the string of arithmetic expression.
      * @return an object of {@code ComplexCalculator}
      */
@@ -34,6 +35,7 @@ public class ComplexCalculator {
 
     /**
      * This function will duplicate a {@code ComplexCalculator} object taking the current function of the passed object.
+     *
      * @param other the object required to duplicate.
      * @return the duplicated object.
      */
@@ -44,14 +46,15 @@ public class ComplexCalculator {
     /**
      * This function will instantiate a {@code ComplexCalculator} object with the function currently used in an existing
      * {@code DifferentialCalculator} object.
-     * @see DifferentialCalculator
+     *
      * @param differential the {@code DifferentialCalculator} object.
      * @return the {@code ComplexCalculator} object.
+     * @see DifferentialCalculator
      */
     public static ComplexCalculator fromDifferential(@NotNull DifferentialCalculator differential) {
         return new ComplexCalculator(differential.getFunction());
     }
-
+    
     /**
      * @return the expression
      */
@@ -90,13 +93,33 @@ public class ComplexCalculator {
      * <li>Multiplication (*)</li>
      * <li>Addition (+)</li>
      * <li>Subtraction (-)</li>
+     * <li>Trigonometric functions:
+     * <ul type='circle'>
+     *      <li>sine (sin)</li>
+     *      <li>cosine (cos)</li>
+     *      <li>tangent (tan)</li>
+     *      <li>cotangent (cot)</li>
+     *      <li>secant (sec)</li>
+     *      <li>cosecant (csc)</li>
+     * </ul></li>
+     * <li>Inverse Trigonometric functions:
+     * <ul type='circle'>
+     *      <li>sine inverse (arcsin)</li>
+     *      <li>cosine inverse (arccos)</li>
+     *      <li>tangent inverse (arctan)</li>
+     *      <li>cotangent inverse (arccot)</li>
+     *      <li>secant inverse(arcsec)</li>
+     *      <li>cosecant inverse(arccsc)</li>
+     * </ul></li>
+     * <li>Natural Logarithm (ln)</li>
+     * <li>Absolute value (|<i>x</i>|)</li>
      * </ul>
-     * If you like to involve variables in the function, you are most welcome to do so.
+     * <b>Note: <i>The angles in trigonometric functions are measured in radians.</i></b><br><br>
      * If there are any variables, you must map them to double values in a {@code Map<Character, Double>} collection.
      * The method will replace the variables with your value and compute the given task.
      * <br><br>You can use <i>pi</i> and <i>e</i> in the middle of the function to use the mathematical value of {@code Math.PI}
      * and {@code Math.E} respectively.<br>
-     * You can also you <i>E</i> to denote exponent. <code>For example, 3.0E10 = 3.0 * 10<sup>10</sup></code>.
+     * You can also you <i>E</i> to denote exponent. For example, <code>3.0E10 = 3.0 * 10<sup>10</sup></code>.
      * The rules of using <i>E</i> will coincide with that of {@code Double}:-
      * <ul>
      * <li>The digits after E must not be fractional.</li>
@@ -106,7 +129,6 @@ public class ComplexCalculator {
      * The following with result in Exceptions:-
      * <ul>
      * <li>replacing E as a variable.</li>
-     * <li>using unexpected letters.</li>
      * <li>missing round brackets.</li>
      * <li>using brackets other than round brackets</li>
      * <li>use of curly or square brackets.</li>
@@ -127,28 +149,33 @@ public class ComplexCalculator {
         Map<Character, Double> variableMap = Objects.requireNonNull(_variableMap);
         String function = "(" + Objects.requireNonNull(this.getFunction()) + ")";
         function = function.replaceAll(" ", "");
-        function = function.replaceAll("pi", String.valueOf(Math.PI));
-        function = function.replaceAll("e", String.valueOf(Math.E));
+        function = function.replaceAll("(?<!\\w)pi(?!\\w)", String.valueOf(Math.PI));
+        function = function.replaceAll("(?<!\\w)e(?!\\w)", String.valueOf(Math.E));
         for (Entry<Character, Double> entry : variableMap.entrySet()) {
             if (entry.getKey() == 'E') throw new IllegalArgumentException("Cannot replace E as a variable.");
             function = function.replaceAll(entry.getKey().toString(), entry.getValue().toString());
         }
-        Matcher matcher = Pattern.compile("[a-zA-DF-Z]").matcher(function);
-        if (matcher.find()) throw new IllegalArgumentException("Unexpected letter: " + matcher.group());
+
         if (count(function, '(') > count(function, ')'))
             throw new IllegalArgumentException("Missing '('");
         if (count(function, '(') < count(function, ')'))
             throw new IllegalArgumentException("Missing ')'");
 
         Matcher matcher1 = Pattern.compile("[(](-?\\d+(\\.\\d+(E-?\\d+)?)?[\\^/*+\\-])+-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
-        Matcher matcher2 = Pattern.compile("[(]-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
+        Matcher trigonometry = Pattern.compile("(arc)?(sin|cos|tan|cot|sec|csc)[(]-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
+        Matcher logarithm = Pattern.compile("ln[(]-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
+        Matcher absolute = Pattern.compile("\\|-?\\d+(\\.\\d+(E-?\\d+)?)?\\|").matcher(function);
+        Matcher matcher2 = Pattern.compile("(?<!\\w)[(]-?\\d+(\\.\\d+(E-?\\d+)?)?[)]").matcher(function);
         Matcher matcher3 = Pattern.compile("(--|\\+\\+)").matcher(function);
         Matcher matcher4 = Pattern.compile("(\\+-|-\\+)").matcher(function);
         boolean match1 = matcher1.find();
+        boolean trigoMatch = trigonometry.find();
+        boolean logMatch = logarithm.find();
+        boolean absMatch = absolute.find();
         boolean match2 = matcher2.find();
         boolean match3 = matcher3.find();
         boolean match4 = matcher4.find();
-        while (match1 || match2 || match3 || match4) {
+        while (match1 || match2 || match3 || match4 || trigoMatch || logMatch || absMatch) {
             function = function.replaceAll("[(]\\+", "(");
             String group;
             if (match1) {
@@ -160,6 +187,85 @@ public class ComplexCalculator {
                 else if (group.indexOf('-') != -1 && group.charAt(group.indexOf('-') - 1) != '(')
                     function = performOperation('-', group, function);
                 else if (group.lastIndexOf('-') != 1) function = performOperation('-', group, function);
+            }
+
+            trigonometry.reset(function);
+            trigoMatch = trigonometry.find();
+            if (trigoMatch) {
+                group = trigonometry.group();
+                if (group.startsWith("arc")) {
+                    String trigoFunction = group.substring(0, 6);
+                    double number = Double.parseDouble(group.substring(7, group.length() - 1));
+                    switch (trigoFunction) {
+                        case "arcsin":
+                            function = function.replace(group, String.valueOf(Math.asin(number)));
+                            break;
+
+                        case "arccos":
+                            function = function.replace(group, String.valueOf(Math.acos(number)));
+                            break;
+
+                        case "arctan":
+                            function = function.replace(group, String.valueOf(Math.atan(number)));
+                            break;
+
+                        case "arccot":
+                            function = function.replace(group, String.valueOf(1.0 / Math.atan(number)));
+                            break;
+
+                        case "arcsec":
+                            function = function.replace(group, String.valueOf(1.0 / Math.acos(number)));
+                            break;
+
+                        case "arccsc":
+                            function = function.replace(group, String.valueOf(1.0 / Math.asin(number)));
+                            break;
+                    }
+                } else {
+                    String trigoFunction = group.substring(0, 3);
+                    double number = Double.parseDouble(group.substring(4, group.length() - 1));
+                    switch (trigoFunction) {
+                        case "sin":
+                            function = function.replace(group, String.valueOf(Math.sin(number)));
+                            break;
+
+                        case "cos":
+                            function = function.replace(group, String.valueOf(Math.cos(number)));
+                            break;
+
+                        case "tan":
+                            function = function.replace(group, String.valueOf(Math.tan(number)));
+                            break;
+
+                        case "cot":
+                            function = function.replace(group, String.valueOf(1.0 / Math.tan(number)));
+                            break;
+
+                        case "sec":
+                            function = function.replace(group, String.valueOf(1.0 / Math.cos(number)));
+                            break;
+
+                        case "csc":
+                            function = function.replace(group, String.valueOf(1.0 / Math.sin(number)));
+                            break;
+                    }
+                }
+            }
+
+            logarithm.reset(function);
+            logMatch = logarithm.find();
+            if (logMatch) {
+                group = logarithm.group();
+                double number = Double.parseDouble(group.substring(3, group.length() - 1));
+                function = function.replace(group, String.valueOf(Math.log(number)));
+            }
+
+            absolute.reset(function);
+            absMatch = absolute.find();
+            if (absMatch) {
+                group = absolute.group();
+                double number = Double.parseDouble(group.substring(1, group.length() - 1));
+                function = function.replace(group, String.valueOf(Math.abs(number)));
             }
 
             matcher2.reset(function);
@@ -184,19 +290,35 @@ public class ComplexCalculator {
             }
 
             matcher1.reset(function);
+            trigonometry.reset(function);
+            logarithm.reset(function);
+            absolute.reset(function);
             matcher2.reset(function);
             matcher3.reset(function);
             matcher4.reset(function);
             match1 = matcher1.find();
+            trigoMatch = trigonometry.find();
+            logMatch = logarithm.find();
+            absMatch = absolute.find();
             match2 = matcher2.find();
             match3 = matcher3.find();
             match4 = matcher4.find();
         }
         try {
-            return Double.parseDouble(function);
+            double answer = Double.parseDouble(function);
+            if (answer > 1E16)
+                throw new ArithmeticException("The value tends to infinity.");
+            else if (answer < -1E16)
+                throw new ArithmeticException("The value tends to negative infinity");
+            else
+                return answer;
         } catch (NumberFormatException ex) {
-            if (function.contains("NaN"))
-                throw new ArithmeticException("Division by zero");
+            if (function.contains("Infinity"))
+                throw new ArithmeticException("The computation contains infinity");
+            else if(function.contains("-Infinity"))
+                throw new ArithmeticException("The computation contains negative infinity");
+            else if(function.contains("NaN"))
+                throw new ArithmeticException("The value in the function was out of its domain");
             else
                 throw new ArithmeticException("Unable to compute the given string.");
         }
@@ -227,19 +349,27 @@ public class ComplexCalculator {
         StringBuilder num2 = new StringBuilder();
         int i;
         if (operator != '-') {
-            for (i = group.indexOf(operator) - 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) || group.charAt(i) == '.' || group.charAt(i) == '-' && (group.charAt(i - 1) == '(' || group.charAt(i - 1) == 'E'); i--) {
+            for (i = group.indexOf(operator) - 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) ||
+                    group.charAt(i) == '.' || group.charAt(i) == '-' && (group.charAt(i - 1) == '(' ||
+                    group.charAt(i - 1) == 'E'); i--) {
                 num1.insert(0, group.charAt(i));
             }
 
-            for (i = group.indexOf(operator) + 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) || group.charAt(i) == '.' || group.charAt(i) == '-' && (i == group.indexOf(operator) + 1 || group.charAt(i - 1) == 'E'); i++) {
+            for (i = group.indexOf(operator) + 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) ||
+                    group.charAt(i) == '.' || group.charAt(i) == '-' && (i == group.indexOf(operator) + 1 ||
+                    group.charAt(i - 1) == 'E'); i++) {
                 num2.append(group.charAt(i));
             }
         } else {
-            for (i = group.lastIndexOf(operator) - 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) || group.charAt(i) == '.' || group.charAt(i) == '-' && (group.charAt(i - 1) == '(' || group.charAt(i - 1) == 'E'); i--) {
+            for (i = group.lastIndexOf(operator) - 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) ||
+                    group.charAt(i) == '.' || group.charAt(i) == '-' && (group.charAt(i - 1) == '(' ||
+                    group.charAt(i - 1) == 'E'); i--) {
                 num1.insert(0, group.charAt(i));
             }
 
-            for (i = group.lastIndexOf(operator) + 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) || group.charAt(i) == '.' || group.charAt(i) == '-' && (i == group.lastIndexOf(operator) + 1 || group.charAt(i - 1) == 'E'); i++) {
+            for (i = group.lastIndexOf(operator) + 1; group.charAt(i) == 'E' || Character.isDigit(group.charAt(i)) ||
+                    group.charAt(i) == '.' || group.charAt(i) == '-' && (i == group.lastIndexOf(operator) + 1 ||
+                    group.charAt(i - 1) == 'E'); i++) {
                 num2.append(group.charAt(i));
             }
         }

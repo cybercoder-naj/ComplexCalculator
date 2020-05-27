@@ -11,7 +11,7 @@ Complex Calculator is a java-based project helping to evaluate arithmetical oper
 
 ## Getting Started
 
-**Version 2.0.1**
+**Version 3.0.0**
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.cybercoder-naj:ComplexCalculator:2.0.1'
+    implementation 'com.github.cybercoder-naj:ComplexCalculator:3.0.0'
 }
 ```
 
@@ -49,7 +49,7 @@ If you are using maven, this is what you must do,
     <dependency>
         <groupId>com.github.cybercoder-naj</groupId>
         <artifactId>ComplexCalculator</artifactId>
-        <version>2.0.1</version>
+        <version>3.0.0</version>
     </dependency>
 </dependencies>
 ```
@@ -62,8 +62,8 @@ After adding the dependencies, you must import the class.
 import com.nishant.complexcalculator.ComplexCalulator;
 ```
 
- - Visit [ComplexCalculator.md](ComplexCalculator.md) to see how to use that class.
- - Visit [DifferentialCalculator.md](DifferentialCalculator.md) to see how to use that class.
+ - Visit [ComplexCalculator](ComplexCalculator.md) to see how to use that class.
+ - Visit [DifferentialCalculator](DifferentialCalculator.md) to see how to use that class.
 
 ### Using Constant Functions
 
@@ -76,7 +76,7 @@ Calling the compute function will return the value of the given expression.
 ```bash
 System.out.println(calc.compute());
 ```
-The output of the following will be **5.0**.
+The output of the following is **5.0**.
 
 ### Using Dependent Functions
 
@@ -92,7 +92,7 @@ Calling the compute function will return the value of the given expression.
 ```bash
 System.out.println(calc.compute(variableMap));
 ```
-The output of the following will be **6.0**.
+The output of the following is **6.0**.
 
 ### Using Exponents
 
@@ -108,7 +108,7 @@ variableMap.put('m', 9.1E-31);
 variableMap.put('v', 2.1E6);
 System.out.println(calc.compute(variableMap));
 ```
-The output of the following will be **3.467294610151753E-10**.
+The output of the following is **3.467294610151753E-10**.
 
 ### Using Pi(π) and e
 
@@ -122,7 +122,62 @@ variableMap.put('x', 0.5);
 System.out.println(calc.compute(variableMap));
 ```
 
-The output of the following will be **155.58676129659997**.
+The output of the following is **155.58676129659997**.
+
+### Using Trigonometric Functions
+
+You can use trigonometric functions in the the expression. For traditional trigonometric functions, use the
+short-hand notation.
+ - sine (sin)
+ - cosine (cos)
+ - tangent (tan)
+ - cotangent (cot)
+ - secant (sec)
+ - cosecant (csc)
+ 
+```bash
+String function = "sin(pi/6)^2 + cos(pi/6)^2";
+ComplexCalculator calc = ComplexCalculator.fromString(function);
+System.out.println(calc.compute());
+```
+The output of the following is **1.0**.
+
+### Using Inverse Trigonometric Functions
+
+To use trigonometric functions, you have to prefix "arc" to the short-hand trigonometric function notation given 
+[here](#using-trigonometric-functions).
+
+```bash
+String function = "arctan(1)";
+ComplexCalculator calc = ComplexCalculator.fromString(function);
+System.out.println(calc.compute() * 180.0 / Math.PI);
+```
+The output of the following is **45.0**.
+
+### Using Logarithmic Function
+
+To calculate the natural logarithm of a number, use _ln_ in the function.
+*Note: the domain of the function is* $x\in(0,\infty)$
+
+```bash
+String function = "ln(sin(pi/2))";
+ComplexCalculator calc = ComplexCalculator.fromString(function);
+System.out.println(calc.compute());
+```
+
+The output of the following is **0.0**.
+
+### Using Absolute Function
+
+The absolute function gives the positive value of the number. For example *|x|*.
+
+```bash
+String function = "|ln(1/e)|";
+ComplexCalculator calc = ComplexCalculator.fromString(function);
+System.out.println(calc.compute());
+```
+
+The output of the following is **1.0**.
 
 ### Finding Derivative at a point
 
@@ -135,7 +190,7 @@ DifferentialCalculator calc = DifferentialCalculator.fromString(function);
 double answer = calc.differentiateAt(2.0);
 System.out.println(Math.round(answer * 1000) / 1000.0);
 ```
-The output of the following will be **-1.0**.
+The output of the following is **-1.0**.
 
 ### Finding the area under the curve in a range.
 
@@ -148,11 +203,11 @@ DifferentialCalculator calc = DifferentialCalculator.fromString(function);
 double answer = calc.integrate(-10, 10);
 System.out.println(Math.round(answer * 1000) / 1000.0);
 ```
-The output of the following will be **22037.657**
+The output of the following is **22037.657**
 
 ## Project Documentation
 
-Don't forget to download the documentation. Visit [Documentation](https://javadoc.jitpack.io/com/github/cybercoder-naj/ComplexCalculator/2.0.1/javadoc) to view the whole documentation.
+Don't forget to download the documentation. Visit [Documentation](https://javadoc.jitpack.io/com/github/cybercoder-naj/ComplexCalculator/3.0.0/javadoc) to view the whole documentation.
 
 ## License
 

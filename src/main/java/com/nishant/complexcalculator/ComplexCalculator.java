@@ -54,7 +54,7 @@ public class ComplexCalculator {
     public static ComplexCalculator fromDifferential(@NotNull DifferentialCalculator differential) {
         return new ComplexCalculator(differential.getFunction());
     }
-    
+
     /**
      * @return the expression
      */

@@ -157,7 +157,7 @@ The output of the following is **45.0**.
 ### Using Logarithmic Function
 
 To calculate the natural logarithm of a number, use _ln_ in the function.
-*Note: the domain of the function is* $x\in(0,\infty)$
+*Note: the domain of the function is 0 < x < infinity*.
 
 ```bash
 String function = "ln(sin(pi/2))";

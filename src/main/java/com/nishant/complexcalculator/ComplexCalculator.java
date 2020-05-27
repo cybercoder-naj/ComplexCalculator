@@ -94,7 +94,7 @@ public class ComplexCalculator {
      * <li>Addition (+)</li>
      * <li>Subtraction (-)</li>
      * <li>Trigonometric functions:
-     * <ul type='circle'>
+     * <ul>
      *      <li>sine (sin)</li>
      *      <li>cosine (cos)</li>
      *      <li>tangent (tan)</li>
@@ -103,7 +103,7 @@ public class ComplexCalculator {
      *      <li>cosecant (csc)</li>
      * </ul></li>
      * <li>Inverse Trigonometric functions:
-     * <ul type='circle'>
+     * <ul>
      *      <li>sine inverse (arcsin)</li>
      *      <li>cosine inverse (arccos)</li>
      *      <li>tangent inverse (arctan)</li>
